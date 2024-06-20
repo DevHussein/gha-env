@@ -10,9 +10,9 @@ env:
 jobs:
   test:
     env:
-      MONGODB_USERNAME: dbUser
-      MONGODB_PASSWORD: p6EutPckHw4IUsus
-      MONGODB_CLUSTER_ADDRESS: cluster0.2qx1b.mongodb.net
+      MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}
+      MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
+      MONGODB_CLUSTER_ADDRESS: ${{ variables.MONGODB_CLUSTER_ADDRESS }}
 
     environment: testing
     runs-on: ubuntu-latest
@@ -31,12 +31,12 @@ jobs:
       - name: Run tests
         run: npm test
       - name: Output information
-        run: echo $MONGODB_USERNAME
+        run: echo "MONGODB_USERNAME: ${{ env.MONGODB_USERNAME }}"
   deploy:
     needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Output information
         run: |
-          echo MONGODB_USERNAME: ${{env.MONGODB_USERNAME}}
-          echo MONGODB_NAME: ${{env.MONGODB_DB_NAME}}
+          echo MONGODB_USERNAME: ${{ env. }}
+          echo MONGODB_NAME: ${{ env.MONGODB_DB_NAME }}
